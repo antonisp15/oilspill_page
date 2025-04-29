@@ -202,10 +202,10 @@
             <input type="text" id="ftpServer" name="ftp_server" placeholder="ftp.server.address">
         </div>
 
-        <label for="cwlCommand">Generated CWL Command:</label>
+        <label for="cwlCommand">Generated CWL Command (You can paste this command into a Docker enabled command line prompt to run your simulation):</label>
         <textarea id="cwlCommand" rows="6" cols="50" readonly></textarea>
 
-        <label for="jsonInput">Generated JSON Input:</label>
+        <label for="jsonInput">Generated JSON Input (You can save this file and run the cwltool with this as your input):</label>
         <textarea id="jsonInput" rows="6" cols="50" class="highlighted" readonly></textarea>
 
         <button type="submit">Generate CWL Command and Input Json file</button>
@@ -217,7 +217,7 @@
 <script>
     // Set default values on page load
     window.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('cdsToken').value = "40d8b300-afa6-49d9-a1be-18ac497df73c";
+        document.getElementById('cdsToken').value = "39d8b300-afa6-49d9-a1be-18ac497df73c";
         document.getElementById('ftpUser').value = "iliad";
         document.getElementById('ftpPassword').value = "password_request_forth";
         document.getElementById('ftpServer').value = "ftp_address_request_forth";

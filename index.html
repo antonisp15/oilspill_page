@@ -258,10 +258,10 @@
 
         // Determine SAT and cont_slick values based on source type
         if (inputFile['source'] === 'satellite') {
-            inputFile['SAT'] = "YES";
+            inputFile['sat'] = "YES";
             inputFile['cont_slick'] = contSlickSelect.value;
         } else if (inputFile['source'] === 'point') {
-            inputFile['SAT'] = "NO";
+            inputFile['sat'] = "NO";
             inputFile['cont_slick'] = contSlickSelect.value;
         }
 
@@ -269,7 +269,7 @@
         document.getElementById("jsonInput").textContent = JSON.stringify(inputFile, null, 4);
 
         // Construct CWL command
-        const cwlCommand = `cwltool https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/cretan_oilspill/pipeline156.cwl#oilspill_pipeline_medslik_156 --SAT "${inputFile['SAT']}" --asf_password "${inputFile['asf_password']}" --time_interval 1 --asf_username "${inputFile['asf_username']}" --bbox "${inputFile['bbox']}" --cds_token "${inputFile['cds_token']}" --cont_slick "${inputFile['cont_slick']}" --date_spill "${inputFile['date_spill']}" --ftp_password "${inputFile['ftp_password']}" --ftp_user "${inputFile['ftp_user']}" --ftp_server "${inputFile['ftp_server']}" --lat_point "${inputFile['lat_point']}" --lon_point "${inputFile['lon_point']}" --remote_dir "${inputFile['remote_dir']}" --spill_dur "${inputFile['spill_dur']}" --spill_res "${inputFile['spill_res']}" --spill_tons "${inputFile['spill_tons']}" --start_date "${inputFile['start_date']}" --use_case_directory "${inputFile['use_case_directory']}" --use_high_res "${inputFile['use_high_res']}" --username "${inputFile['username']}" --password "${inputFile['password']}"`;
+        const cwlCommand = `cwltool https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/cretan_oilspill/pipeline156.cwl#oilspill_pipeline_medslik_156 --SAT "${inputFile['sat']}" --asf_password "${inputFile['asf_password']}" --time_interval 1 --asf_username "${inputFile['asf_username']}" --bbox "${inputFile['bbox']}" --cds_token "${inputFile['cds_token']}" --cont_slick "${inputFile['cont_slick']}" --date_spill "${inputFile['date_spill']}" --ftp_password "${inputFile['ftp_password']}" --ftp_user "${inputFile['ftp_user']}" --ftp_server "${inputFile['ftp_server']}" --lat_point "${inputFile['lat_point']}" --lon_point "${inputFile['lon_point']}" --remote_dir "${inputFile['remote_dir']}" --spill_dur "${inputFile['spill_dur']}" --spill_res "${inputFile['spill_res']}" --spill_tons "${inputFile['spill_tons']}" --start_date "${inputFile['start_date']}" --use_case_directory "${inputFile['use_case_directory']}" --use_high_res "${inputFile['use_high_res']}" --username "${inputFile['username']}" --password "${inputFile['password']}"`;
 
         // Display CWL command
         document.getElementById("cwlCommand").textContent = cwlCommand;

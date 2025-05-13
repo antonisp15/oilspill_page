@@ -159,7 +159,7 @@
             <input type="number" step="any" id="lonPoint" name="lon_point" value="24.866" required>
 
             <label for="dateSpill">Date of Spill:</label>
-            <input type="datetime-local" id="dateSpill" name="date_spill" value="2025-02-19T06:22:00Z" required>
+            <input type="datetime-local" id="dateSpill" name="date_spill" value="2025-05-01T12:00" required>
 
             <label for="minLon">Min Longitude:</label>
             <input type="number" step="any" id="minLon" name="min_lon" value="24.07">
@@ -258,16 +258,16 @@
 
         // Determine SAT and cont_slick values based on source type
         if (inputFile['source'] === 'satellite') {
-            inputFile['sat'] = "YES";
+            inputFile['SAT'] = "YES";
             inputFile['cont_slick'] = contSlickSelect.value;
         } else if (inputFile['source'] === 'point') {
-            inputFile['sat'] = "NO";
+            inputFile['SAT'] = "NO";
             inputFile['cont_slick'] = contSlickSelect.value;
         }
 
         // Generate JSON input
         document.getElementById("jsonInput").textContent = JSON.stringify(inputFile, null, 4);
-
+        
         // Construct CWL command
         const cwlCommand = `cwltool https://raw.githubusercontent.com/ILIAD-ocean-twin/application_package/main/cretan_oilspill/pipeline156.cwl#oilspill_pipeline_medslik_156 --sat "${inputFile['sat']}" --asf_password "${inputFile['asf_password']}" --time_interval 1 --asf_username "${inputFile['asf_username']}" --bbox "${inputFile['bbox']}" --cds_token "${inputFile['cds_token']}" --cont_slick "${inputFile['cont_slick']}" --date_spill "${inputFile['date_spill']}:00Z" --ftp_password "${inputFile['ftp_password']}" --ftp_user "${inputFile['ftp_user']}" --ftp_server "${inputFile['ftp_server']}" --lat_point "${inputFile['lat_point']}" --lon_point "${inputFile['lon_point']}" --remote_dir "${inputFile['remote_dir']}" --spill_dur "${inputFile['spill_dur']}" --spill_res "${inputFile['spill_res']}" --spill_tons "${inputFile['spill_tons']}" --start_date "${inputFile['start_date']}" --use_case_directory "${inputFile['use_case_directory']}" --use_high_res "${inputFile['use_high_res']}" --username "${inputFile['username']}" --password "${inputFile['password']}"`;
 

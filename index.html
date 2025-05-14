@@ -159,10 +159,9 @@
             <input type="number" step="any" id="lonPoint" name="lon_point" value="24.866" required>
 
             <label for="dateSpill">Date of Spill:</label>
-            <input type="datetime-local" id="dateSpill" name="date_spill" value="2025-05-01T12:00" onchange="this.value += ':00Z'">
+            <input type="datetime-local" id="dateSpill" name="date_spill" value="2025-05-01T12:00" required>
 
-
-            
+                        
             <label for="minLon">Min Longitude:</label>
             <input type="number" step="any" id="minLon" name="min_lon" value="24.07">
 
@@ -257,8 +256,8 @@
         inputFile['password'] = inputFile['cmems_password'];
         inputFile['use_case_directory'] = "MEDSLIK_GLO";
         inputFile['remote_dir'] = "/iliad";
+        inputFile['date_spill'] = document.getElementById("dateSpill").value + ":00Z";
 
-        // Determine SAT and cont_slick values based on source type
         if (inputFile['source'] === 'satellite') {
             inputFile['SAT'] = "YES";
             inputFile['cont_slick'] = contSlickSelect.value;
@@ -275,8 +274,32 @@
 
         // Display CWL command
         document.getElementById("cwlCommand").textContent = cwlCommand;
+
+        // Add buttons dynamically if not already added
+        const buttonsDiv = document.getElementById("cwlButtons");
+        if (!buttonsDiv.hasChildNodes()) {
+            const copyBtn = document.createElement("button");
+            copyBtn.textContent = "COPY CWL COMMAND";
+            copyBtn.onclick = () => {
+                navigator.clipboard.writeText(cwlCommand);
+                copyBtn.textContent = "COPIED!";
+                setTimeout(() => { copyBtn.textContent = "COPY CWL COMMAND"; }, 1500);
+            };
+
+            const refreshBtn = document.createElement("button");
+            refreshBtn.textContent = "GENERATE NEW CWL COMMAND";
+            refreshBtn.onclick = () => {
+                location.reload();
+            };
+
+            buttonsDiv.appendChild(document.createElement("br"));
+            buttonsDiv.appendChild(copyBtn);
+            buttonsDiv.appendChild(document.createTextNode(" "));
+            buttonsDiv.appendChild(refreshBtn);
+        }
     });
 </script>
+
 
 </body>
 </html>

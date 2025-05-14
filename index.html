@@ -209,7 +209,9 @@
         <label for="jsonInput">Generated JSON Input (You can save this file and run the cwltool with this as your input):</label>
         <textarea id="jsonInput" rows="6" cols="50" class="highlighted" readonly></textarea>
 
-        <button type="submit">Generate CWL Command and Input Json file</button>
+        <button type="submit">Generate CWL Command</button>
+        <button type="button" id="copyCwlBtn">COPY CWL COMMAND</button>
+        <button type="button" id="refreshPageBtn">GENERATE NEW CWL COMMAND</button>
     </form>
 </div>
 
@@ -247,7 +249,20 @@
         event.preventDefault();
         const formData = new FormData(event.target);
         const inputFile = {};
+    document.getElementById('copyCwlBtn').addEventListener('click', function () {
+        const cwlText = document.getElementById("cwlCommand").textContent;
+        if (cwlText.trim()) {
+            navigator.clipboard.writeText(cwlText);
+            this.textContent = "COPIED!";
+            setTimeout(() => { this.textContent = "COPY CWL COMMAND"; }, 1500);
+        } else {
+            alert("No CWL command to copy yet.");
+        }
+    });
 
+document.getElementById('refreshPageBtn').addEventListener('click', function () {
+    location.reload();
+});
         formData.forEach((value, key) => {
             inputFile[key] = value;
         });

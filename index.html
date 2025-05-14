@@ -159,8 +159,20 @@
             <input type="number" step="any" id="lonPoint" name="lon_point" value="24.866" required>
 
             <label for="dateSpill">Date of Spill:</label>
-            <input type="datetime-local" id="dateSpill" name="date_spill" value="2025-05-01T12:00:00Z">
+            <input type="datetime-local" id="dateSpill" name="date_spill" value="2025-05-01T12:00">
+            <button onclick="processDate()">Submit</button>
+            <script>
+                function processDate() {
+                const dateInput = document.getElementById("dateSpill").value; // e.g., "2025-05-01T12:00"
+                if (dateInput) {
+                    const formatted = dateInput + ":00Z"; // ISO 8601 format
+                    console.log("Formatted Date:", formatted);
 
+        // Example: send it via AJAX, populate hidden field, etc.
+        // document.getElementById("hiddenDateField").value = formatted;
+    }
+}
+</script>
             <label for="minLon">Min Longitude:</label>
             <input type="number" step="any" id="minLon" name="min_lon" value="24.07">
 
